@@ -45,39 +45,48 @@ struct Node
 */
 class Solution{
     public:
+    struct Node* reverse(struct Node *head)
+    {
+        struct Node* prev=NULL;
+        struct Node* curr=head;
+        struct Node* temp;
+        while(curr)
+        {
+            temp=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=temp;
+        }
+        return prev;
+        
+    }
     struct Node* modifyTheList(struct Node *head)
     {
         //add code here.
-        vector<int>vc;
-        struct Node* temp;
-        temp=head;
+        struct Node* s=head;
+        struct Node* f=head;
+        while(f->next!=NULL and f->next->next!=NULL)
+        {
+            s=s->next;
+            f=f->next->next;
+        }
+        struct Node* f1=head;
+        struct Node* s1=reverse(s->next);
         struct Node* temp1;
-        temp1=head;
-        while(temp)
+        struct Node* temp2;
+        temp1 = f1;
+        temp2 = s1;
+        s->next=NULL;
+        while(temp1 and temp2)
         {
-            vc.push_back(temp->data);
-            temp=temp->next;
+            int k=temp1->data;
+            temp1->data=temp2->data - temp1->data;
+            temp2->data=k;
+            temp1=temp1->next;
+            temp2=temp2->next;
         }
-        int n=vc.size();
-        int k=0;
-        while(k<(n/2))
-        {
-            head->data = vc[n-1-k]-vc[k];
-            k++;
-            head=head->next;
-        }
-        if(n%2!=0)
-        {
-            head=head->next;
-        }
-        k--;
-        while(head)
-        {
-            head->data = vc[k];
-            k--;
-            head=head->next;
-        }
-        return temp1;
+        s->next = reverse(s1);
+        return head;
     }
 };
 
