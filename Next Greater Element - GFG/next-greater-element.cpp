@@ -4,43 +4,37 @@ using namespace std;
 
 
 // } Driver Code Ends
-class Solution
-{
-    public:
-    //Function to find the next greater element for each element of the array.
-    vector<long long> nextLargerElement(vector<long long> arr, int n){
+// User Function Template for C++ solution
+
+class Solution {
+  public:
+    vector<long long> nextLargerElement(vector<long long> &arr, int n){
         // Your code here
-        vector<long long>vc(n,-1);
+        vector<long long>res(n,-1);
         stack<long long>st;
         st.push(arr[n-1]);
         for(int i=n-2;i>=0;i--)
         {
-            if(st.empty())
+            if(!st.empty() and st.top() > arr[i])
             {
-                vc[i]=0;
+                res[i]=st.top();
             }
-            else if(arr[i]<st.top())
-            {
-                vc[i]=st.top();
-            }
-            else
-            {
+            else{
                 while(!st.empty())
                 {
                     if(st.top() > arr[i])
                     {
-                        vc[i]=st.top();
+                        res[i]=st.top();
                         break;
                     }
-                    else
-                    {
+                    else{
                         st.pop();
                     }
                 }
             }
             st.push(arr[i]);
         }
-        return vc;
+        return res;
     }
 };
 
@@ -59,11 +53,13 @@ int main()
         for(int i=0;i<n;i++)
             cin>>arr[i];
         
-        Solution obj;
-        vector <long long> res = obj.nextLargerElement(arr, n);
+        Solution ob;
+        
+        vector <long long> res = ob.nextLargerElement(arr, n);
         for (long long i : res) cout << i << " ";
         cout<<endl;
     }
 	return 0;
 }
+
 // } Driver Code Ends
