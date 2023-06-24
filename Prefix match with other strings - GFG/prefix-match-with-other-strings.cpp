@@ -9,36 +9,30 @@ using namespace std;
 
 class Solution{   
 public:
-    int klengthpref(string arr[], int n, int k, string str){ 
-        int res=0;
-        for(int i=0;i<n;i++)
+    int klengthpref(string arr[], int n, int k, string str){    
+        vector<int>vc(n,0);
+        for(int i=0;i<k;i++)
         {
-            int x=0,c=0;
-            for(int j=0;j<arr[i].size();j++)
+            for(int j=0;j<n;j++)
             {
-                if(x<k)
+                if(arr[j].size() >= k)
                 {
-                    if(arr[i][j] == str[x])
+                    if(arr[j][i] == str[i] and vc[j]==i)
                     {
-                        c++;
-                        x++;
-                    }
-                    else
-                    {
-                        break;
+                        vc[j]++;
                     }
                 }
-                else
-                {
-                    break;
-                }
-            }
-            if(c==k)
-            {
-                res+=1;
             }
         }
-        return res;
+        int c=0;
+        for(int i=0;i<n;i++)
+        {
+            if(vc[i]==k)
+            {
+                c+=1;
+            }
+        }
+        return c;
     }
 };
 
