@@ -44,28 +44,6 @@ class Solution
     Node * removeDuplicates( Node *head) 
     {
      // your code goes here
-        // Node* temp=head;
-        // Node* temp1;
-        // Node* prev;
-        // while(temp)
-        // {
-        //     temp1=temp;
-        //     prev=temp;
-        //     while(temp1->next)
-        //     {
-        //         if(temp->data == temp1->next->data)
-        //         {
-        //             temp1->next=temp1->next->next;
-        //         }
-        //         else
-        //         {
-        //             temp1=temp1->next;
-        //             //prev=prev->next;
-        //         }
-        //     }
-        //     temp=temp->next;
-        // }
-        // return head;
         unordered_map<int,int>s;
         vector<int>vc;
         Node* temp = head;
@@ -81,13 +59,10 @@ class Solution
         temp=head;
         Node* prev=NULL;
         int i=0;
-        //cout << head->data;
         for(auto it:vc)
         {
-            //cout << temp->data << endl;
             temp->data = it;
             prev=temp;
-            //cout << temp->data << endl;
             temp=temp->next;
         }
         prev->next=NULL;
