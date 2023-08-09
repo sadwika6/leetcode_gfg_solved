@@ -31,13 +31,15 @@ public:
         //     t=(t/vc[t]);
         // }
         // return t;
-        for(int i=2;i*i <= N;i++)
+        int i=2;
+        while(i<=sqrt(N))
         {
             if(N%i==0)
             {
                 N=N/i;
                 i--;
             }
+            i++;
         }
         return N;
     }
