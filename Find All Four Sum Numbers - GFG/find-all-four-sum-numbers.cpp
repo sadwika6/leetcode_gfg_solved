@@ -12,41 +12,46 @@ class Solution{
     // k : the quadruple sum required
     vector<vector<int> > fourSum(vector<int> &arr, int k) {
         // Your code goes here
+        vector<vector<int>>res;
+        vector<vector<int>>ans;
+        set<vector<int>>st;
         sort(arr.begin(),arr.end());
-        int n=arr.size();
-        set<vector<int>>vc;
-        for(int i=0;i<n;i++)
+        for(int i=0;i<arr.size();i++)
         {
-            for(int j=i+1;j<n;j++)
+            for(int j=i+1;j<arr.size();j++)
             {
-                int a=j+1,b=n-1,s;
-                while(a<b)
+                int l = j+1;
+                int r = arr.size()-1;
+                while(l<r)
                 {
-                    s=arr[i]+arr[j]+arr[a]+arr[b];
-                    if(s==k)
+                    int s = arr[i]+arr[j]+arr[l]+arr[r];
+                    if(s == k)
                     {
-                        
-                        vc.insert({arr[i],arr[j],arr[a],arr[b]});
-                        a++;
-                        b--;
+                        res.push_back({arr[i],arr[j],arr[l],arr[r]});
+                        l++;
+                        r--;
                     }
                     else if(s < k)
                     {
-                        a++;
+                        l++;
                     }
                     else
                     {
-                        b--;
+                        r--;
                     }
                 }
             }
         }
-        vector<vector<int>>res;
-        for(auto it:vc)
+        for(int i=0;i<res.size();i++)
         {
-            res.push_back(it);
+            sort(res[i].begin(),res[i].end());
+            if(st.find(res[i]) == st.end())
+            {
+                ans.push_back(res[i]);
+                st.insert(res[i]);
+            }
         }
-        return res;
+        return ans;
     }
 };
 
